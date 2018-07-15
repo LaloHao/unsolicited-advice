@@ -1,0 +1,101 @@
+* Unsolicited Advice
+  Unexpectedly tell your parents to stop trying to tell you when a
+  super class method wants to be triggered.
+
+  An overkill HOC that saves you the time of calling
+
+  #+BEGIN_SRC javascript
+    class parent {
+      method() {
+        //method
+      }
+    }
+
+    class child extends parent {
+      method() {
+        super.method();
+        // method
+      }
+    }
+  #+END_SRC
+
+  and instead do
+
+  #+BEGIN_SRC javascript
+    class parent {
+      @advice
+      method() {
+        // method
+      }
+    }
+
+    class child extends parent {
+      @after
+      method() {
+        // method
+      }
+    }
+  #+END_SRC
+
+  but also
+
+  #+BEGIN_SRC javascript
+    class child extends parent {
+      @before
+      method() {
+        // method
+      }
+    }
+  #+END_SRC
+
+  which is the equivalent to
+
+  #+BEGIN_SRC javascript
+    class child extends parent {
+      method() {
+        // method
+        super.method();
+      }
+    }
+  #+END_SRC
+
+  and
+
+  #+BEGIN_SRC
+    class child extends parent {
+      @around
+      method() {
+        // method
+      }
+    }
+  #+END_SRC
+
+  to
+
+  #+BEGIN_SRC javascript
+    class child extends parent {
+      method() {
+        super.method();
+        // method
+        super.method();
+      }
+    }
+  #+END_SRC
+
+  you can also override and not call the parent's method at all just
+  by not specifying an advice
+
+  #+BEGIN_SRC javascript
+    class child extends parent {
+      method() {
+        // method
+      }
+    }
+  #+END_SRC
+
+** TODO More
+   Advices are saved in a chain in the order specified by =@after=
+   =@before= =@around=, and executed in that order when called.
+
+   So you can do more interesthing stuff, see =Advice.test.js= line
+   102 =@before= test.

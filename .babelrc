@@ -1,0 +1,16 @@
+{
+  "presets": ["env"],
+  "env": {
+    "development": {
+      "plugins": [
+        ["transform-decorators-legacy"]
+      ]
+    },
+    "test": {
+      "presets": ["env"],
+      "plugins": [
+        ["transform-decorators-legacy"]
+      ]
+    }
+  }
+}
