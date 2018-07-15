@@ -1,10 +1,12 @@
 {
   "name": "unsolicited-advice",
   "version": "1.0.0",
-  "main": "./src/index.js",
+  "main": "./dist",
   "author": "Eduardo Vazquez (lalohao@gmail.com)",
   "license": "WTFPL",
   "scripts": {
+    "compile": "babel src --out-dir dist --ignore test.js",
+    "prepublish": "npm run compile",
     "test": "jest src/ --no-cache --watch",
     "coverage": "jest src/ --no-cache --coverage"
   },
